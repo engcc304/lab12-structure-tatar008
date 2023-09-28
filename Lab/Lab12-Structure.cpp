@@ -88,10 +88,74 @@
 */
 
 #include <stdio.h>
+#include <string.h>
+
+// โค้ดฟังก์ชันเพื่อคำนวณเกรด
+char calculateGrade(float score) {
+    if (score >= 90) {
+        return 'A';
+    } else if (score >= 80) {
+        return 'B';
+    } else if (score >= 70) {
+        return 'C';
+    } else if (score >= 60) {
+        return 'D';
+    } else {
+        return 'F';
+    }
+}
+struct Student {
+        char Name[20];
+        char ID[5];
+        float ScoreSub1;
+        float ScoreSub2;
+        float ScoreSub3;
+        float ScoreSub4;
+        float ScoreSub5;
+    } typedef S;
 
 int main() {
+    
 
-    //--| YOUR CODE HERE
+    S students[3]; // สร้างอาร์เรย์ของนักเรียน
 
-    return 0 ;
-}//end main function
+    // อ่านข้อมูลของนักเรียน
+    printf("Enter the details of 3 students:\n");
+    for (int i = 0; i < 3; i++) {
+        printf("Student %d:\n", i + 1);
+        printf("Name: ");
+        scanf("%s", students[i].Name);
+        printf("ID: ");
+        scanf("%s", students[i].ID);
+        printf("Scores in Subject 1: ");
+        scanf("%f", &students[i].ScoreSub1);
+        printf("Scores in Subject 2: ");
+        scanf("%f", &students[i].ScoreSub2);
+        printf("Scores in Subject 3: ");
+        scanf("%f", &students[i].ScoreSub3);
+        printf("Scores in Subject 4: ");
+        scanf("%f", &students[i].ScoreSub4);
+        printf("Scores in Subject 5: ");
+        scanf("%f", &students[i].ScoreSub5);
+    }
+
+    // คำนวณและแสดงผลลัพธ์
+    printf("Student Details:\n");
+    for (int i = 0; i < 3; i++) {
+        printf("Student %d:\n", i + 1);
+        printf("Name: %s\n", students[i].Name);
+        printf("ID: %s\n", students[i].ID);
+        printf("Scores: %.0f %.0f %.0f %.0f %.0f\n", students[i].ScoreSub1, students[i].ScoreSub2,
+               students[i].ScoreSub3, students[i].ScoreSub4, students[i].ScoreSub5);
+        printf("Grades: %c %c %c %c %c\n", calculateGrade(students[i].ScoreSub1),
+               calculateGrade(students[i].ScoreSub2), calculateGrade(students[i].ScoreSub3),
+               calculateGrade(students[i].ScoreSub4), calculateGrade(students[i].ScoreSub5));
+
+        // คำนวณคะแนนเฉลี่ย
+        float averageScore = (students[i].ScoreSub1 + students[i].ScoreSub2 + students[i].ScoreSub3 +
+                              students[i].ScoreSub4 + students[i].ScoreSub5) / 5;
+        printf("Average Scores: %.1f\n", averageScore);
+    }
+
+    return 0;
+}
